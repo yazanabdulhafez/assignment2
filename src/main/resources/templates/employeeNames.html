@@ -5,11 +5,21 @@
     <title>Names</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
-<body>
-<ul class="list-group" th:each="name :${fullNames}">
 
-    <li class="list-group-item list-group-item-primary" style="width: 18rem;"><span th:text="${name}"></span></li>
+<body style="background-color:#ffe8d6;">
+<header style="display:flex;justify-content:space-between;align-items:center">
+
+    <h1 style="margin-left:20px;">Employees App</h1>
+    <nav style="margin-right:30px;">
+        <a href="/" style="text-decoration:none;">Home</a>
+    </nav>
+</header>
+<main>
+<ul class="list-group" th:each="name :${fullNames}" style="margin:10px;">
+
+    <li class="list-group-item list-group-item-primary" style="width: 18rem;margin:10px;"><span th:text="${name}"></span></li>
 
 </ul>
+</main>
 </body>
 </html>

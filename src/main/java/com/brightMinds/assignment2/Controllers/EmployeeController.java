@@ -23,60 +23,80 @@ public class EmployeeController {
     EmployeeRepository employeeRepository;
 
     @GetMapping("/employees/{type}")
-    public String returnByEmploymentType(@PathVariable String type, Model m){
+    public String returnByEmploymentType(@PathVariable String type, Model m) {
         List<Employee> employeesToBeReturned = new ArrayList<>();
-        List<Employee> employees = (List<Employee>) employeeRepository.findAll();
-        for(Employee employee:employees){
-            if (Objects.equals(employee.getEmploymentType(), type)){
-               employeesToBeReturned.add(employee);
+        try {
+            List<Employee> employees = (List<Employee>) employeeRepository.findAll();
+            for (Employee employee : employees) {
+                if (Objects.equals(employee.getEmploymentType(), type)) {
+                    employeesToBeReturned.add(employee);
+                }
             }
+            m.addAttribute("employees", employeesToBeReturned);
+            return "employmentType";
+        } catch (Exception e) {
+            return "error";
         }
-        m.addAttribute("employees" , employeesToBeReturned);
-        return "employmentType";
+
     }
 
     @GetMapping("/employees/fullName")
-    public String getEmployeesFullName(Model m){
+    public String getEmployeesFullName(Model m) {
         List<Employee> employees = (List<Employee>) employeeRepository.findAll();
-        List<String> fullNames=new ArrayList<>();
-        for(Employee employee:employees){
-            fullNames.add(employee.getFirstName()+" "
-                    +employee.getMiddleName()+" "+employee.getLastName());
+        try {
+            List<String> fullNames = new ArrayList<>();
+            for (Employee employee : employees) {
+                fullNames.add(employee.getFirstName() + " "
+                        + employee.getMiddleName() + " " + employee.getLastName());
+            }
+            m.addAttribute("fullNames", fullNames);
+            return "employeeNames";
+        } catch (Exception e) {
+            return "error";
         }
-        m.addAttribute("fullNames",fullNames);
-        return "employeeNames";
     }
 
     @GetMapping("/employees/vaildEmails")
-    public String getVaildAndNotVaildEmails(Model m){
-        List<Employee> employees = (List<Employee>) employeeRepository.findAll();
-        List<Long> vaildIds=new ArrayList<>();
-        List<Long> notVaildIds=new ArrayList<>();
-        for(Employee employee:employees){
-           if (isValidEmail(employee.getEmail())){
-               vaildIds.add(employee.getEmploymentId());
+    public String getVaildAndNotVaildEmails(Model m) {
+        try {
+            List<Employee> employees = (List<Employee>) employeeRepository.findAll();
+            List<Long> validIds = new ArrayList<>();
+            List<Long> notValidIds = new ArrayList<>();
+            for (Employee employee : employees) {
+                if (isValidEmail(employee.getEmail())) {
+                    validIds.add(employee.getEmploymentId());
 
-           }else{
-               notVaildIds.add(employee.getEmploymentId());
-           }
+                } else {
+                    notValidIds.add(employee.getEmploymentId());
+                }
+            }
+            m.addAttribute("validIdsList", validIds);
+            m.addAttribute("notvalidIdsList", notValidIds);
+            return "idPage";
+        } catch (Exception e) {
+            return "error";
         }
-        m.addAttribute("vaildIdsList",vaildIds);
-        m.addAttribute("notvaildIdsList",notVaildIds);
-        return "idPage";
 
     }
 
     @GetMapping("/employees/cuc")
-    public String getFullNameAndEmploynentType(Model m){
-        List<Employee> employees = (List<Employee>) employeeRepository.findAll();
-        List<String> fullNames=new ArrayList<>();
-        for(Employee employee:employees){
-            fullNames.add("Employee Name: "+decapialize(employee.getFirstName())
-                    +capitalize(employee.getMiddleName())+capitalize(employee.getLastName())
-                    +'\n'+"Employment Type: "+employee.getEmploymentType().toUpperCase());
+    public String getFullNameAndEmploynentType(Model m) {
+
+        try {
+
+
+            List<Employee> employees = (List<Employee>) employeeRepository.findAll();
+            List<String> fullNames = new ArrayList<>();
+            for (Employee employee : employees) {
+                fullNames.add("Employee Name: " + decapialize(employee.getFirstName())
+                        + capitalize(employee.getMiddleName()) + capitalize(employee.getLastName())
+                        + '\n' + "Employment Type: " + employee.getEmploymentType().toUpperCase());
+            }
+            m.addAttribute("camelAndUpperCase", fullNames);
+            return "camelUpperCases";
+        } catch (Exception e) {
+            return "error";
         }
-        m.addAttribute("camelAndUpperCase",fullNames);
-        return "camelUpperCases";
     }
 
     public static boolean isValidEmail(String email) {
@@ -89,7 +109,7 @@ public class EmployeeController {
         return false;
     }
 
-    public String decapialize(String str){
+    public String decapialize(String str) {
         return str.substring(0, 1).toLowerCase() + str.substring(1);
     }
 }

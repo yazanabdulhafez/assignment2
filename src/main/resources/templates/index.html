@@ -4,13 +4,47 @@
     <meta charset="UTF-8">
     <title>home</title>
 </head>
-<body>
+
+<body style="background-color:#ffe8d6;">
+<header style="display:flex;justify-content:space-between;align-items:center">
+
+    <h1 style="margin-left:20px;">Employees App</h1>
+    <h2 style="margin-right:30px;">Author:Yazan Alkharabsheh</h2>
+</header>
+<main style="margin:20px;">
 <h1>Welcome to our website</h1>
-<ul>
-    <li><a href="#">return employees based on employment type</a></li>
-    <li><a href="#">return the Full name of all employees </a></li>
-    <li><a href="#">return the Valid & Invalid Email IDs</a></li>
-    <li><a href="#">return the Employee Full Name in Camel Casing & Employment Type in uppercase</a></li>
+<ul style="line-height: 60px;">
+    <li>
+        <form action="" id="form" method="get" title="return employees based on employment type">
+        <label for="employmentType">return employees based on employment type</label>
+
+        <select id="employmentType">
+            <option value id="first">Please select</option>
+            <option value="/employees/Permanent">Permanent</option>
+            <option value="/employees/Intern">Intern</option>
+            <option value="/employees/Contract">Contract</option>
+        </select>
+
+        <input type="submit" value="Search">
+
+    </form>
+
+    </li>
+    <li><a href="/employees/fullName" style="text-decoration:none;">return the Full name of all employees </a></li>
+    <li><a href="/employees/vaildEmails" style="text-decoration:none;">return the Valid & Invalid Email IDs</a></li>
+    <li><a href="/employees/cuc" style="text-decoration:none;">return the Employee Full Name in Camel Casing & Employment Type in uppercase</a></li>
 </ul>
+</main>
+<script>
+    document.getElementById('form').employmentType.onchange = function() {
+    var newaction = this.value;
+    document.getElementById('form').action = newaction;
+
+};
+
+(function(){
+  document.getElementById("first").text = "";
+})()
+</script>
 </body>
 </html>
