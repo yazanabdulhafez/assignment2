@@ -9,7 +9,7 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
-    private long employeeId;
+    private long employmentId;
 
     private String firstName;
     private String middleName;
@@ -24,9 +24,10 @@ public class Employee {
     }
 
 
-    public Employee(String firstName, String middleName,
+    public Employee(long employmentId,String firstName, String middleName,
                     String lastName, String mobileNumber,
                     String email, long extensionNumber, String employmentType) {
+        this.employmentId=employmentId;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -36,12 +37,12 @@ public class Employee {
         this.employmentType = employmentType;
     }
 
-    public long getEmployeeId() {
-        return employeeId;
+    public long getEmploymentId() {
+        return employmentId;
     }
 
-    public void setEmployeeId(long employeeId) {
-        this.employeeId = employeeId;
+    public void setEmploymentId(long employmentId) {
+        this.employmentId = employmentId;
     }
 
     public String getFirstName() {
@@ -103,7 +104,7 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "employeeId=" + employeeId +
+                "employmentId=" + employmentId +
                 ", firstName='" + firstName + '\'' +
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +

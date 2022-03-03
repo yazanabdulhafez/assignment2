@@ -32,7 +32,7 @@ public class EmployeeController {
             }
         }
         m.addAttribute("employees" , employeesToBeReturned);
-        return "employeeByType";
+        return "employmentType";
     }
 
     @GetMapping("/employees/fullName")
@@ -54,10 +54,10 @@ public class EmployeeController {
         List<Long> notVaildIds=new ArrayList<>();
         for(Employee employee:employees){
            if (isValidEmail(employee.getEmail())){
-               vaildIds.add(employee.getEmployeeId());
+               vaildIds.add(employee.getEmploymentId());
 
            }else{
-               notVaildIds.add(employee.getEmployeeId());
+               notVaildIds.add(employee.getEmploymentId());
            }
         }
         m.addAttribute("vaildIdsList",vaildIds);
@@ -66,27 +66,30 @@ public class EmployeeController {
 
     }
 
-    @GetMapping("/employees/camel&upperCase")
+    @GetMapping("/employees/cuc")
     public String getFullNameAndEmploynentType(Model m){
         List<Employee> employees = (List<Employee>) employeeRepository.findAll();
         List<String> fullNames=new ArrayList<>();
         for(Employee employee:employees){
-            fullNames.add("Employee Name: "+employee.getFirstName()
+            fullNames.add("Employee Name: "+decapialize(employee.getFirstName())
                     +capitalize(employee.getMiddleName())+capitalize(employee.getLastName())
                     +'\n'+"Employment Type: "+employee.getEmploymentType().toUpperCase());
         }
-        m.addAttribute("camel&upperCase",fullNames);
-        return "employeeNames";
+        m.addAttribute("camelAndUpperCase",fullNames);
+        return "camelUpperCases";
     }
 
     public static boolean isValidEmail(String email) {
         if (email != null) {
-            Pattern p = Pattern.compile("^[A-Za-z].*?@gmail\\.com$");
+            Pattern p = Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+                    + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$");
             Matcher m = p.matcher(email);
             return m.find();
         }
         return false;
     }
 
-
+    public String decapialize(String str){
+        return str.substring(0, 1).toLowerCase() + str.substring(1);
+    }
 }
