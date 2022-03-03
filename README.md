@@ -17,41 +17,49 @@ Note:
 
 2. Employee List
 
-* First Name : John
-* Middle Name : Zakaria
-* Last Name :
-* Mobile Number : 529853225
-* Email : john@farabi.ae
-* Extension Number : 632
-* Employment ID : 001
-* Employment Type : Permanent
+   1. first employee
 
-* First Name : Kamini
-* Middle Name : Krishna
-* Last Name : Menon
-* Mobile Number : 566333225
-* Email : kamini@farabi.ae
-* Extension Number : 600
-* Employment ID : 002
-* Employment Type : Intern
+       * First Name : John
+       * Middle Name : Zakaria
+       * Last Name :
+       * Mobile Number : 529853225
+       * Email : john@farabi.ae
+       * Extension Number : 632
+       * Employment ID : 001
+       * Employment Type : Permanent
 
-* First Name : Kalyan
-* Middle Name : Lohitha
-* Last Name : Warrier
-* Mobile Number : 529852369
-* Email : kalyanfarabi.ae
-* Extension Number : 623
-* Employment ID : 003
-* Employment Type : Contract
+   2. second employee
 
-* First Name : Peter
-* Middle Name :
-* Last Name : Jones
-* Mobile Number : 236965325
-* Email : peter@farabi.a
-* Extension Number : 609
-* Employment ID : 004
-* Employment Type : Permanent
+       * First Name : Kamini
+       * Middle Name : Krishna
+       * Last Name : Menon
+       * Mobile Number : 566333225
+       * Email : kamini@farabi.ae
+       * Extension Number : 600
+       * Employment ID : 002
+       * Employment Type : Intern
+
+   3. third employee
+
+       * First Name : Kalyan
+       * Middle Name : Lohitha
+       * Last Name : Warrier
+       * Mobile Number : 529852369
+       * Email : kalyanfarabi.ae
+       * Extension Number : 623
+       * Employment ID : 003
+       * Employment Type : Contract
+
+   4. fourth employee
+
+       * First Name : Peter
+       * Middle Name :
+       * Last Name : Jones
+       * Mobile Number : 236965325
+       * Email : peter@farabi.a
+       * Extension Number : 609
+       * Employment ID : 004
+       * Employment Type : Permanent
 
 ## log book
 
