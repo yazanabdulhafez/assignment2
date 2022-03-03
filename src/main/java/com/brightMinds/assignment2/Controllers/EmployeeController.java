@@ -2,6 +2,8 @@ package com.brightMinds.assignment2.Controllers;
 
 import com.brightMinds.assignment2.Models.Employee;
 import com.brightMinds.assignment2.Repositories.EmployeeRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,8 @@ import static org.springframework.util.StringUtils.capitalize;
 @Controller
 public class EmployeeController {
 
+    private static Logger logger = LogManager.getLogger(EmployeeController.class);
+
     @Autowired
     EmployeeRepository employeeRepository;
 
@@ -35,6 +39,7 @@ public class EmployeeController {
             m.addAttribute("employees", employeesToBeReturned);
             return "employmentType";
         } catch (Exception e) {
+            
             return "error";
         }
 
