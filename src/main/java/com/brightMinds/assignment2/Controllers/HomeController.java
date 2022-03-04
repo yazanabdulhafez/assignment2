@@ -17,6 +17,7 @@ public class HomeController {
         return "index";
     }
 
+    /* this end point to add employees to the table in database */
     @GetMapping("/addEmployeeList")
     public String addEmployee(){
         Employee employeeOne=new Employee(001,"John","Zakaria","","529853225","john@farabi.ae",632,"Permanent");

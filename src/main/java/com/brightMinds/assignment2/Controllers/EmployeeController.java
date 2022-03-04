@@ -21,7 +21,7 @@ import static org.springframework.util.StringUtils.capitalize;
 @Controller
 public class EmployeeController {
 
-    private static Logger logger = LogManager.getLogger(EmployeeController.class);
+    private static final Logger logger = LogManager.getLogger(EmployeeController.class);
 
     @Autowired
     EmployeeRepository employeeRepository;
@@ -30,7 +30,9 @@ public class EmployeeController {
     public String returnByEmploymentType(@PathVariable String type, Model m) {
         List<Employee> employeesToBeReturned = new ArrayList<>();
         try {
+
             List<Employee> employees = (List<Employee>) employeeRepository.findAll();
+            if(employees.isEmpty()) throw new Exception();
             for (Employee employee : employees) {
                 if (Objects.equals(employee.getEmploymentType(), type)) {
                     employeesToBeReturned.add(employee);
@@ -39,7 +41,7 @@ public class EmployeeController {
             m.addAttribute("employees", employeesToBeReturned);
             return "employmentType";
         } catch (Exception e) {
-            
+            logger.info("logger message"+e.getMessage());
             return "error";
         }
 
@@ -47,8 +49,9 @@ public class EmployeeController {
 
     @GetMapping("/employees/fullName")
     public String getEmployeesFullName(Model m) {
-        List<Employee> employees = (List<Employee>) employeeRepository.findAll();
         try {
+            List<Employee> employees = (List<Employee>) employeeRepository.findAll();
+            if(employees.isEmpty()) throw new Exception();
             List<String> fullNames = new ArrayList<>();
             for (Employee employee : employees) {
                 fullNames.add(employee.getFirstName() + " "
@@ -57,6 +60,7 @@ public class EmployeeController {
             m.addAttribute("fullNames", fullNames);
             return "employeeNames";
         } catch (Exception e) {
+            logger.info("logger message"+e.getMessage());
             return "error";
         }
     }
@@ -65,6 +69,7 @@ public class EmployeeController {
     public String getVaildAndNotVaildEmails(Model m) {
         try {
             List<Employee> employees = (List<Employee>) employeeRepository.findAll();
+            if(employees.isEmpty()) throw new Exception();
             List<Long> validIds = new ArrayList<>();
             List<Long> notValidIds = new ArrayList<>();
             for (Employee employee : employees) {
@@ -79,6 +84,7 @@ public class EmployeeController {
             m.addAttribute("notvalidIdsList", notValidIds);
             return "idPage";
         } catch (Exception e) {
+            logger.info("logger message"+e.getMessage());
             return "error";
         }
 
@@ -88,9 +94,8 @@ public class EmployeeController {
     public String getFullNameAndEmploynentType(Model m) {
 
         try {
-
-
             List<Employee> employees = (List<Employee>) employeeRepository.findAll();
+            if(employees.isEmpty()) throw new Exception();
             List<String> fullNames = new ArrayList<>();
             for (Employee employee : employees) {
                 fullNames.add("Employee Name: " + decapialize(employee.getFirstName())
@@ -100,6 +105,7 @@ public class EmployeeController {
             m.addAttribute("camelAndUpperCase", fullNames);
             return "camelUpperCases";
         } catch (Exception e) {
+            logger.info("logger message"+e.getMessage());
             return "error";
         }
     }
