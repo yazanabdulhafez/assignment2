@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,36 @@ public class EmployeeController {
 
     @Autowired
     EmployeeRepository employeeRepository;
+
+    @GetMapping("/employees/add")
+    public String addEmployeePage(Model model) {
+        model.addAttribute("employees", new Employee());
+        return "addEmployee";
+    }
+
+    @PostMapping("/employees/add")
+    public RedirectView addNewEmployee( @RequestParam long employmentId,
+                                  @RequestParam String firstName,
+                                  @RequestParam String middleName,
+                                  @RequestParam String lastName,
+                                  @RequestParam String mobileNumber,
+                                  @RequestParam String email,
+                                  @RequestParam long extensionNumber,
+                                  @RequestParam String employmentType){
+        try {
+            Employee employee=new Employee(employmentId,firstName,middleName
+                                           ,lastName,mobileNumber,email,extensionNumber,employmentType);
+            List<Employee> allEmployees;
+            allEmployees= (List<Employee>) employeeRepository.findAll();
+            if(!allEmployees.contains(employee)) {
+                employeeRepository.save(employee);
+            }
+            return new RedirectView("/employees/fullName");
+        } catch (Exception exception){
+            System.out.println(exception.getMessage());
+            return new RedirectView("/error");
+        }
+    }
 
     @GetMapping("/employees/{type}")
     public String returnByEmploymentType(@PathVariable String type, Model m) {
@@ -121,6 +154,7 @@ public class EmployeeController {
     }
 
     public String decapialize(String str) {
+        /* we can use str.toLowerCase(); */
         return str.substring(0, 1).toLowerCase() + str.substring(1);
     }
 }

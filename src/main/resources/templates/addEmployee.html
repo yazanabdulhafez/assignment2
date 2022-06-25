@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main>
+    <h1>Form</h1>
+    <fieldset>
+        <legend>Add New Employee</legend>
+        <form action="#" th:action="@{/employees/add}" th:object="${employees}" method="post">
+
+            <p>Id of Employee: <input type="number" th:field="*{employmentId}" /></p>
+            <p>First Name: <input type="text" th:field="*{firstName}" /></p>
+            <p>Middle Name <input type="text" th:field="*{middleName}" /></p>
+            <p>Last Name <input type="text" th:field="*{lastName}" /></p>
+            <p>Mobile Number <input type="text" th:field="*{mobileNumber}" /></p>
+            <p>Email: <input type="text" th:field="*{email}" /></p>
+            <p>Extension Number: <input type="number" th:field="*{extensionNumber}" /></p>
+            <p>Employment type <input type="text" th:field="*{employmentType}" /></p>
+
+            <p><input type="submit" value="Add Employee" /> </p>
+            <br>
+            <br>
+        </form>
+
+    </fieldset>
+</main>
+<footer>
+    <p>All rights reserved &copy;2021</p>
+</footer>
+</body>
+</html>
