@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT $JAVA_OPTS -jar out/artifacts/assignment2_jar/assignment2.jar
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar build/libs/assignment2-0.0.1-SNAPSHOT.jar
